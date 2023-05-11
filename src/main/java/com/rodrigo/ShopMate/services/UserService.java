@@ -21,4 +21,9 @@ public class UserService {
             return user;
         }
 
+        public ListUserDto findById(Long id){
+            var user = this.repository.getReferenceById(id);
+            return new ListUserDto(user);
+        }
+
 }
