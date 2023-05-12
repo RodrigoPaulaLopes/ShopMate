@@ -2,6 +2,7 @@ package com.rodrigo.ShopMate.config;
 
 import com.rodrigo.ShopMate.entities.Order;
 import com.rodrigo.ShopMate.entities.User;
+import com.rodrigo.ShopMate.enums.OrderStatus;
 import com.rodrigo.ShopMate.repositories.OrderRepository;
 import com.rodrigo.ShopMate.repositories.UserRepository;
 import org.aspectj.weaver.ast.Or;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,8 +35,8 @@ public class ProfileConfig implements CommandLineRunner {
 
         this.userRepository.saveAll(Arrays.asList(u1, u2));
 
-        var o1 = new Order(null, Instant.parse("2023-05-12T19:30:00Z"), u1);
-        var o2 = new Order(null, Instant.parse("2023-05-11T19:30:00Z"), u2);
+        var o1 = new Order(null, Instant.parse("2023-05-12T19:30:00Z"), OrderStatus.PAID, u1);
+        var o2 = new Order(null, Instant.parse("2023-05-11T19:30:00Z"), OrderStatus.DELIVERED, u2);
 
 
         this.orderRepository.saveAll(Arrays.asList(o1, o2));

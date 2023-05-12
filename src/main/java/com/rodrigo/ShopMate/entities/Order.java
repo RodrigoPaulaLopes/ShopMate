@@ -1,5 +1,6 @@
 package com.rodrigo.ShopMate.entities;
 
+import com.rodrigo.ShopMate.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,9 @@ public class Order implements Serializable {
     private Long id;
 
     private Instant moment;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
