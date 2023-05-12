@@ -20,9 +20,9 @@ public class ProfileConfig implements CommandLineRunner {
 
 
         var user = new ArrayList<User>();
-        user.add(new User(null, "Rodrigo", "rodrigo.lopes@email.com.br", "12345", "21996041143"));
-        user.add(new User(null, "Camille", "camille.lopes@email.com.br", "12345", "21996041143"));
-        user.add(new User(null, "amanda", "amanda.santos@email.com.br", "12345", "21996041143"));
+        user.add(new User(null, "Rodrigo", "rodrigo.lopes@email.com.br", "12345", "21996041143", null));
+        user.add(new User(null, "Camille", "camille.lopes@email.com.br", "12345", "21996041143", null));
+        user.add(new User(null, "amanda", "amanda.santos@email.com.br", "12345", "21996041143", null));
 
 
         this.userRepository.saveAll(user);
