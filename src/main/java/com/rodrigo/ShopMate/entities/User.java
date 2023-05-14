@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_User")
 public class User implements Serializable {
 
     private static final Long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class User implements Serializable {
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "User")
     private List<Order> orders = new ArrayList<>();
 
 }

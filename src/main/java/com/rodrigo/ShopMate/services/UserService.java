@@ -17,13 +17,13 @@ public class UserService {
 
 
         public Page<ListUserDto> findAll(Pageable paginacao){
-            var user = this.repository.findAll(paginacao).map(ListUserDto::new);
-            return user;
+            var User = this.repository.findAll(paginacao).map(ListUserDto::new);
+            return User;
         }
 
         public ListUserDto findById(Long id){
-            var user = this.repository.getReferenceById(id);
-            return new ListUserDto(user);
+            var User = this.repository.getReferenceById(id);
+            return new ListUserDto(User);
         }
 
 }

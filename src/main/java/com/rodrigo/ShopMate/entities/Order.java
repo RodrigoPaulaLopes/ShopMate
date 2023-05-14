@@ -27,8 +27,8 @@ public class Order implements Serializable {
     private OrderStatus orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "User_id")
+    private User User;
 
 
 }
