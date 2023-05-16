@@ -1,5 +1,6 @@
 package com.rodrigo.ShopMate.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,25 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
+
     public Product(Long id, String name, String description, double price, String imgUri) {
+        this.setId(id);
+        this.setName(name);
+        this.setDescription(description);
+        this.setPrice(price);
+        this.setImgUri(imgUri);
     }
+
+    public Product(Long id, String name, String description, double price, String imgUri, Set<Category> lcat1) {
+        this.setId(id);
+        this.setName(name);
+        this.setDescription(description);
+        this.setPrice(price);
+        this.setImgUri(imgUri);
+    }
+
+
 }

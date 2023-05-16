@@ -32,4 +32,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "User")
     private List<Order> orders = new ArrayList<>();
 
+    public User(Long id, String name, String email, String phone, String password) {
+        this.setId(id);
+        this.setName(name);
+        this.setEmail(email);
+        this.setPhone(phone);
+        this.setPassword(password);
+    }
 }

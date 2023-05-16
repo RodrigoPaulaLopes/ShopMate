@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
 
@@ -22,10 +23,10 @@ public class OrderItemPk implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Product product = new Product();
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order order = new Order();
 
 }

@@ -1,15 +1,9 @@
 package com.rodrigo.ShopMate.config;
 
-import com.rodrigo.ShopMate.entities.Category;
-import com.rodrigo.ShopMate.entities.Product;
-import com.rodrigo.ShopMate.entities.User;
-import com.rodrigo.ShopMate.entities.Order;
+import com.rodrigo.ShopMate.entities.*;
 
 import com.rodrigo.ShopMate.enums.OrderStatus;
-import com.rodrigo.ShopMate.repositories.CategoryRepository;
-import com.rodrigo.ShopMate.repositories.ProductRepository;
-import com.rodrigo.ShopMate.repositories.UserRepository;
-import com.rodrigo.ShopMate.repositories.OrderRepository;
+import com.rodrigo.ShopMate.repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +29,8 @@ public class ProfileConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -64,8 +60,8 @@ public class ProfileConfig implements CommandLineRunner {
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 
-        var u1 = new User(null, "rodrigo", "rodrigo@email.com", "1234", "21996041143", null);
-        var u2 = new User(null, "camille", "camille@email.com", "1234", "21996041143", null);
+        var u1 = new User(null, "rodrigo", "rodrigo@email.com", "1234", "21996041143");
+        var u2 = new User(null, "camille", "camille@email.com", "1234", "21996041143");
 
 
         this.UserRepository.saveAll(Arrays.asList(u1, u2));
@@ -75,6 +71,19 @@ public class ProfileConfig implements CommandLineRunner {
 
 
         this.orderRepository.saveAll(Arrays.asList(o1, o2));
+
+        OrderItem oi1 = new OrderItem(p1, o1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(p3, o1, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(p3, o2, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(p5, o2, 2, p5.getPrice());
+
+        this.orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+
+       Payment pay1 = new Payment(null, Instant.parse("2023-05-12T21:30:00Z"), o1);
+       o1.setPayment(pay1);
+
+       this.orderRepository.save(o1);
 
     }
 }
