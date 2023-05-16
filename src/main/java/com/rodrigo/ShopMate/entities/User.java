@@ -1,5 +1,6 @@
 package com.rodrigo.ShopMate.entities;
 
+import com.rodrigo.ShopMate.dtos.InsertUserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,5 +39,12 @@ public class User implements Serializable {
         this.setEmail(email);
         this.setPhone(phone);
         this.setPassword(password);
+    }
+
+    public User(InsertUserDto user) {
+        this.setName(user.name());
+        this.setEmail(user.email());
+        this.setPhone(user.phone());
+        this.setPassword(user.password());
     }
 }
