@@ -18,7 +18,12 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id")
 public class Order implements Serializable {
     private static final Long serialVersionUID = 1L;
-
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User user) {
+        this.setId(id);
+        this.setMoment(moment);
+        this.setOrderStatus(orderStatus);
+        this.setUser(user);
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,11 +43,14 @@ public class Order implements Serializable {
     @JoinColumn(name = "User_id")
     private User User;
 
-
-    public Order(Long id, Instant moment, OrderStatus orderStatus, User user) {
-        this.setId(id);
-        this.setMoment(moment);
-        this.setOrderStatus(orderStatus);
-        this.setUser(user);
+    public Double getTotal(){
+        var sum = 0.0;
+        for (OrderItem item : items){
+            sum += item.getSubTotal();
+        }
+        return sum;
     }
+
+
+
 }

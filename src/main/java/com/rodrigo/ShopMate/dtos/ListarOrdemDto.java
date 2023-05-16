@@ -9,9 +9,9 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-public record ListarOrdemDto(Long id, Instant moment, OrderStatus status, ListUserDto Users, Set<ListOrderItemDto> ordemItem) {
+public record ListarOrdemDto(Long id, Instant moment, OrderStatus status, ListUserDto Users, Set<ListOrderItemDto> ordemItem, Double total) {
 
     public ListarOrdemDto(Order order){
-        this(order.getId(), order.getMoment(), order.getOrderStatus(), new ListUserDto(order.getUser()), new HashSet<>(order.getItems().stream().map(ListOrderItemDto::new).toList()));
+        this(order.getId(), order.getMoment(), order.getOrderStatus(), new ListUserDto(order.getUser()), new HashSet<>(order.getItems().stream().map(ListOrderItemDto::new).toList()), order.getTotal());
     }
 }
