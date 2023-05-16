@@ -5,6 +5,7 @@ import com.rodrigo.ShopMate.dtos.ListUserDto;
 import com.rodrigo.ShopMate.dtos.UpdateUserDto;
 import com.rodrigo.ShopMate.services.UserService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,14 +34,14 @@ public class UserResource {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ListUserDto> create(@RequestBody InsertUserDto user, UriComponentsBuilder builder){
+    public ResponseEntity<ListUserDto> create(@Valid @RequestBody InsertUserDto user, UriComponentsBuilder builder){
         var userdto = service.insert(user);
         var uri = builder.path("/users/{id}").buildAndExpand(userdto.id()).toUri();
         return ResponseEntity.created(uri).body(userdto);
     }
     @PutMapping
     @Transactional
-    public ResponseEntity<ListUserDto> update(@RequestBody UpdateUserDto user){
+    public ResponseEntity<ListUserDto> update(@Valid @RequestBody UpdateUserDto user){
         var userdto = service.update(user);
         return ResponseEntity.ok().body(userdto);
     }
