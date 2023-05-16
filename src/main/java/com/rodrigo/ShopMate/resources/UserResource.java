@@ -2,6 +2,7 @@ package com.rodrigo.ShopMate.resources;
 
 import com.rodrigo.ShopMate.dtos.InsertUserDto;
 import com.rodrigo.ShopMate.dtos.ListUserDto;
+import com.rodrigo.ShopMate.dtos.UpdateUserDto;
 import com.rodrigo.ShopMate.services.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,20 @@ public class UserResource {
         var userdto = service.insert(user);
         var uri = builder.path("/users/{id}").buildAndExpand(userdto.id()).toUri();
         return ResponseEntity.created(uri).body(userdto);
+    }
+    @PutMapping
+    @Transactional
+    public ResponseEntity<ListUserDto> update(@RequestBody UpdateUserDto user){
+        var userdto = service.update(user);
+        return ResponseEntity.ok().body(userdto);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
